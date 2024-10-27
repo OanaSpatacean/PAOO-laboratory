@@ -27,6 +27,8 @@ class FrenchBulldog
         {
             delete destr; 
             std::cout<<"French bulldog feel asleep: "<<name<<std::endl; //obiectul a fost distrus si resursele sale au fost eliberate
+
+            //la apelarea move constructorului, deoarece name a fost mutat, este posibil sa nu mai aiba continut valid, rezultand în faptul ca este gol sau inițializat implicit
         }
 
         //copy constructor pentru copierea atributelor și a resurselor alocate dinamic
@@ -36,6 +38,15 @@ class FrenchBulldog
             //alocare de memorie noua pe heap pentru destr pentru a evita folosirea aceluiași pointer în ambele obiecte
             destr = new std::string(*(exactCopyOfFrenchBulldog.destr));
             std::cout<<"French bulldog copied (because it is so cute): "<<name<<std::endl;
+        }
+
+        //move constructor pentru mutarea resurselor fără a crea duplicat
+        FrenchBulldog(FrenchBulldog &&anotherFrenchBulldog) noexcept
+            : name(std::move(anotherFrenchBulldog.name)), snore(anotherFrenchBulldog.snore), goofy(anotherFrenchBulldog.goofy), destr(anotherFrenchBulldog.destr) 
+        { //std::move() transforma obiectul intr-o referinta rvalue
+          //name în obiectul FrenchBulldog nou creat acum conține datele care erau în anotherFrenchBulldog.name
+            anotherFrenchBulldog.destr = nullptr; //setez pointerul destr al sursei (anotherFrenchBulldog) pe nullptr pentru a preveni eliberarea duplicată
+            std::cout<<"French bulldog moved: "<<name<<std::endl;
         }
 
         //metoda pentru afisarea caracteristicilor buldogului, data ca exemplu de incapsulare

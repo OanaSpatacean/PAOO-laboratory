@@ -12,5 +12,9 @@ int main() {
     FrenchBulldog bulldog3 = bulldog1;
     bulldog3.display();
 
+    //mutare folosind move constructorul
+    FrenchBulldog bulldog4 = std::move(bulldog2);
+    bulldog4.display();
+
     return 0;
 }
