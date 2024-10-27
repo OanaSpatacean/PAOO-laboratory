@@ -2,7 +2,7 @@
 
 int main() {
     //constructor normal
-    FrenchBulldog bulldog1("Hera", true, true);//crearea unui obiect de tip FrenchBulldog folosind constructorul pentru a initializa atributele name, snore si goofy
+    FrenchBulldog bulldog1("Hera", true, true);
     bulldog1.display();
     
     FrenchBulldog bulldog2("Toby", false, false);
