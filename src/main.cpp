@@ -8,5 +8,9 @@ int main() {
     FrenchBulldog bulldog2("Toby", false, false);
     bulldog2.display();
 
+    //copiere folosind copy constructorul
+    FrenchBulldog bulldog3 = bulldog1;
+    bulldog3.display();
+
     return 0;
 }

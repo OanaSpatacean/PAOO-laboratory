@@ -10,7 +10,7 @@ class FrenchBulldog
         std::string name;
         bool snore;
         bool goofy; //incapsulare -> toti membrii clasei FrenchBulldog sunt privati, ceea ce inseamna ca nu pot fi accesati direct din afara clasei
-        std::string* destr; //pointer alocat dinamic pe heap care va fi eliberat de destructor
+        std::string *destr; //pointer alocat dinamic pe heap care va fi eliberat de destructor
 
     public:
         //constructor pentru initializarea atributelor buldogului 
@@ -19,14 +19,23 @@ class FrenchBulldog
         {
             //alocare memorie pe heap pentru destr și initializarea lui
             destr = new std::string("Woof woof! I want to play!");
-            std::cout <<"French bulldog is awake: "<<name<<std::endl; //mesaj in constructor la iesirea standard, pt a verifica ca este creat un obiect de tip FrenchBuldog
+            std::cout<<"French bulldog is awake: "<<name<<std::endl; //mesaj in constructor la iesirea standard, pt a verifica ca este creat un obiect de tip FrenchBuldog
         }
 
         //destructor pentru eliberarea memoriei de pe heap (memorie alocată dinamic)
         ~FrenchBulldog() 
         {
             delete destr; 
-            std::cout << "French bulldog feel asleep: "<<name<<std::endl; //obiectul a fost distrus si resursele sale au fost eliberate
+            std::cout<<"French bulldog feel asleep: "<<name<<std::endl; //obiectul a fost distrus si resursele sale au fost eliberate
+        }
+
+        //copy constructor pentru copierea atributelor și a resurselor alocate dinamic
+        FrenchBulldog(const FrenchBulldog &exactCopyOfFrenchBulldog)
+            : name(exactCopyOfFrenchBulldog.name), snore(exactCopyOfFrenchBulldog.snore), goofy(exactCopyOfFrenchBulldog.goofy) 
+        {
+            //alocare de memorie noua pe heap pentru destr pentru a evita folosirea aceluiași pointer în ambele obiecte
+            destr = new std::string(*(exactCopyOfFrenchBulldog.destr));
+            std::cout<<"French bulldog copied (because it is so cute): "<<name<<std::endl;
         }
 
         //metoda pentru afisarea caracteristicilor buldogului, data ca exemplu de incapsulare
